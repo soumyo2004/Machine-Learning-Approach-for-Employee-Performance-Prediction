@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Productivity Prediction Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom purple background color matching the screenshot */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #6a4c93;
+            min-height: 100vh;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="%234a3666" d="M 0,0 L 50,50 L 0,100 Z M 100,0 L 50,50 L 100,100 Z M 50,50 L 0,50 L 50,0 Z M 50,50 L 100,50 L 50,100 Z" /></svg>');
+            background-size: 800px 800px;
+        }
+        .form-container {
+            position: relative;
+            z-index: 10;
+        }
+        /* Style for the input labels */
+        .input-label {
+            color: #d8b4fe; /* Light purple for visibility */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="flex flex-col">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-indigo-900 shadow-xl text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-extrabold tracking-wider">Employee Productivity Prediction</span>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="/" class="text-indigo-200 px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition duration-150">Home</a>
+                    <a href="/about" class="text-indigo-200 px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition duration-150">About</a>
+                    <a href="/predict" class="bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-600 transition duration-150 shadow-md">Predict</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="form-container w-full max-w-5xl bg-white bg-opacity-10 p-8 rounded-2xl shadow-2xl backdrop-blur-sm border border-white border-opacity-20">
+
+            <h1 class="text-3xl font-bold text-white mb-8 border-b border-white border-opacity-30 pb-4 text-center">
+                Enter Employee Features for Prediction
+            </h1>
+
+            <form action="/pred" method="POST" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- 13 Input Fields -->
+
+                <!-- Group 1: Categorical/Time -->
+                <div><label for="quarter" class="input-label">Quarter (e.g., 0=Q1, 1=Q2...)</label><input type="number" id="quarter" name="quarter" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="department" class="input-label">Department (Encoded e.g., 1)</label><input type="number" id="department" name="department" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="day" class="input-label">Day (Encoded e.g., 0=Monday)</label><input type="number" id="day" name="day" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="team" class="input-label">Team (1-12)</label><input type="number" id="team" name="team" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+
+                <!-- Group 2: Key Metrics (Floats) -->
+                <div><label for="targeted_productivity" class="input-label">Targeted Productivity (0.0 - 1.0)</label><input type="number" step="0.01" id="targeted_productivity" name="targeted_productivity" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="smv" class="input-label">SMV (Standard Min Value)</label><input type="number" step="0.01" id="smv" name="smv" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="no_of_workers" class="input-label">No. of Workers (e.g., 8.0)</label><input type="number" step="0.1" id="no_of_workers" name="no_of_workers" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="month" class="input-label">Month (1-12)</label><input type="number" id="month" name="month" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+
+                <!-- Group 3: Overtime/Idle/Change (Integers) -->
+                <div><label for="over_time" class="input-label">Over Time (Minutes)</label><input type="number" id="over_time" name="over_time" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="incentive" class="input-label">Incentive (Value)</label><input type="number" id="incentive" name="incentive" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="idle_time" class="input-label">Idle Time (Minutes)</label><input type="number" step="0.1" id="idle_time" name="idle_time" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="idle_men" class="input-label">Idle Men (Count)</label><input type="number" id="idle_men" name="idle_men" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+                <div><label for="no_of_style_change" class="input-label">No. of Style Changes</label><input type="number" id="no_of_style_change" name="no_of_style_change" required class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-80 border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-1 shadow-inner"></div>
+
+                <!-- Submit Button -->
+                <div class="lg:col-span-3 mt-4 flex justify-center">
+                    <button type="submit" class="w-full md:w-1/2 lg:w-1/3 px-8 py-4 bg-green-500 text-white font-extrabold text-lg rounded-xl shadow-2xl hover:bg-green-600 transition duration-300 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-green-300">
+                        SUBMIT
+                    </button>
+                </div>
+            </form>
+
+            <!-- Simulated Worker Graphic Area -->
+            <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-20 hidden md:block" style="pointer-events: none;">
+                 <!-- Geometric shapes to represent the people/gears from the screenshot -->
+                <svg class="absolute bottom-0 right-1/4 w-32 h-32 text-indigo-300" viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="50" r="40"/></svg>
+                <svg class="absolute bottom-0 right-1/2 w-48 h-48 text-pink-300" viewBox="0 0 100 100" fill="currentColor"><rect x="10" y="10" width="80" height="80" rx="15"/></svg>
+                <svg class="absolute top-1/2 left-1/4 w-24 h-24 text-yellow-300 animate-spin" viewBox="0 0 100 100" fill="currentColor"><path d="M50 0 L70 30 L100 30 L80 50 L100 70 L70 70 L50 100 L30 70 L0 70 L20 50 L0 30 L30 30 Z"/></svg>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>

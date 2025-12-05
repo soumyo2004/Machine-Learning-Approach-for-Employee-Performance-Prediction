@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Productivity Prediction Using ML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #000000;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+        .navbar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+        }
+        .header-section {
+            background-color: #FF5733; /* Orange/Coral header color */
+            padding: 30px 20px;
+            color: white;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        .prediction-text {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .visuals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .chart-box {
+            background-color: #00CED1; /* Cyan background for charts */
+            border: 5px solid white;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('[https://placehold.co/300x200/00CED1/FFFFFF?text=Productivity+Chart+Placeholder](https://placehold.co/300x200/00CED1/FFFFFF?text=Productivity+Chart+Placeholder)');
+            background-size: cover;
+            background-position: center;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/predict">Predict</a>
+    </div>
+
+    <div class="header-section">
+        <!-- prediction_text is passed from the Flask app.py -->
+        <p class="prediction-text">{{ prediction_text }}</p>
+    </div>
+
+    <div class="visuals-grid">
+        <!-- Placeholder boxes for the six charts/graphs shown in the image -->
+        <div class="chart-box"></div>
+        <div class="chart-box"></div>
+        <div class="chart-box"></div>
+        <div class="chart-box"></div>
+        <div class="chart-box"></div>
+        <div class="chart-box"></div>
+    </div>
+</body>
+</html>
